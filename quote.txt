@@ -1,1 +1,0 @@
-http://api.voicerss.org/?key=9056b0fa2f254e00bf592bff3fd1412d&src=Before you criticize someone, you should walk a mile in their shoes. That way, when you criticize them, youre a mile away, and you have their shoes&hl=en-us&f=44khz_16bit_mono
