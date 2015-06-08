@@ -37,13 +37,13 @@ urllib.urlretrieve (lines, "weather.mp3")
 #####
 # SEND OFF
 #####
-text_file = open('bye.txt', 'r')
-lines = text_file.read()
-urllib.urlretrieve (lines, "bye.mp3")
+#text_file = open('bye.txt', 'r')
+#lines = text_file.read()
+#urllib.urlretrieve (lines, "bye.mp3")
 
 
 # Play
 os.system('play intro.mp3')
 os.system('play quote.mp3')
 os.system('play weather.mp3')
-os.system('play bye.mp3')
+#os.system('play bye.mp3')

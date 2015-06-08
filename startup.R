@@ -53,11 +53,11 @@ say <- paste0('good ',
               time, 
               ' mister brew. this is day number ',
               replace_number(lived + 1),
-              '. you have used up ',
-              replace_number(percent),
-              ' percent of your life and you have about',
-              replace_number(as.numeric(death-today)),
-              ' days of life left. ',
+#               '. you have used up ',
+#               replace_number(percent),
+#               ' percent of your life and you have about',
+#               replace_number(as.numeric(death-today)),
+#               ' days of life left. ',
               '       the quote of the day is ')
 
 intro_parameters <- paste0('key=', api_key, 
@@ -125,31 +125,31 @@ con <-file("weather.txt")
 writeLines(voice_weather, con)
 close(con)
 
-#####
-# Link for send-off
-#####
-
-words <- read.csv('words.csv', stringsAsFactors = FALSE)
-positives <- words$word[which(words$pos == 'adjective' &
-                               words$sentiment == 'positive' &
-                                !grepl('LY', words$word))]
-positive <- sample(positives, 1)
-
-negatives <- words$word[which(words$pos == 'adjective' &
-                               words$sentiment == 'negative' &
-                                !grepl('LY', words$word))]
-negative <- sample(negatives, 2)
-
-bye <- paste0('sometimes life can be ',
-              negative[1], ' and ', negative[2],
-              '.  at least make today ', positive)
-
-bye_parameters <- paste0('key=', api_key, 
-                           '&src=', bye,
-                           '&hl=en-gb',
-                           '&f=44khz_16bit_mono')
-bye_quote <- paste0(link, bye_parameters)
-
-con <-file("bye.txt")
-writeLines(bye_quote, con)
-close(con)
+# #####
+# # Link for send-off
+# #####
+# 
+# words <- read.csv('words.csv', stringsAsFactors = FALSE)
+# positives <- words$word[which(words$pos == 'adjective' &
+#                                words$sentiment == 'positive' &
+#                                 !grepl('LY', words$word))]
+# positive <- sample(positives, 1)
+# 
+# negatives <- words$word[which(words$pos == 'adjective' &
+#                                words$sentiment == 'negative' &
+#                                 !grepl('LY', words$word))]
+# negative <- sample(negatives, 2)
+# 
+# bye <- paste0('sometimes life can be ',
+#               negative[1], ' and ', negative[2],
+#               '.  at least make today ', positive)
+# 
+# bye_parameters <- paste0('key=', api_key, 
+#                            '&src=', bye,
+#                            '&hl=en-gb',
+#                            '&f=44khz_16bit_mono')
+# bye_quote <- paste0(link, bye_parameters)
+# 
+# con <-file("bye.txt")
+# writeLines(bye_quote, con)
+# close(con)
