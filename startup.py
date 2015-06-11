@@ -8,8 +8,11 @@ import rpy2.robjects as robjects
 os.chdir('/home/joebrew/Documents/startup')
 
 # Run R code to get link for the day
-robjects.r['source']("startup.R")
+os.system('Rscript startup.R')
+#robjects.r['source']("startup.R")
 
+# Language
+catalan = True
 
 #####
 # INTRO
@@ -43,7 +46,11 @@ urllib.urlretrieve (lines, "weather.mp3")
 
 
 # Play
-os.system('play intro.mp3')
-os.system('play quote.mp3')
-os.system('play weather.mp3')
+if catalan:
+	os.system('play intro.mp3')
+else:
+	os.system('play intro.mp3')
+	os.system('play quote.mp3')
+	os.system('play weather.mp3')
+
 #os.system('play bye.mp3')

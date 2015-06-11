@@ -2,6 +2,8 @@ library(qdap)
 library(weatherData)
 setwd('/home/joebrew/Documents/startup')
 
+catalan <- TRUE
+
 # Define birthday and life expectancy
 birth <- as.Date('1985-11-07')
 expected_survival <- 90
@@ -17,13 +19,24 @@ left <- as.numeric((death - today) / 365.25)
 hour <- as.numeric(substr(Sys.time(), 12, 13))
 minute <- as.numeric(substr(Sys.time(), 15,16))
 
-time <- ifelse(hour > 3 & hour < 12,
-               'morning',
-               ifelse(hour < 17,
-                      'afternoon',
-                      ifelse(hour < 20,
-                             'evening',
-                             'night')))
+if(catalan){
+  time <- ifelse(hour > 3 & hour < 12,
+                 'bon dia',
+                 ifelse(hour < 17,
+                        'bona tarda',
+                        ifelse(hour < 20,
+                               'bona vespre',
+                               'bona nit')))
+} else {
+  time <- ifelse(hour > 3 & hour < 12,
+                 'morning',
+                 ifelse(hour < 17,
+                        'afternoon',
+                        ifelse(hour < 20,
+                               'evening',
+                               'night')))
+}
+
 
 # Set random seed
 seed <- round((as.numeric(format(today, '%m')) + 
@@ -49,21 +62,44 @@ link <- 'http://api.voicerss.org/?'
 # Link for introductory text
 #####
 
-say <- paste0('good ', 
-              time, 
-              ' mister brew. this is day number ',
-              replace_number(lived + 1),
-#               '. you have used up ',
-#               replace_number(percent),
-#               ' percent of your life and you have about',
-#               replace_number(as.numeric(death-today)),
-#               ' days of life left. ',
-              '       the quote of the day is ')
+if(catalan){
+  say <- paste0(time,
+                'senyor bru.')
+#   , 
+#                 ' senor brew. avui es el dia numero ',
+#                 lived + 1,
+#                 #               '. you have used up ',
+#                 #               replace_number(percent),
+#                 #               ' percent of your life and you have about',
+#                 #               replace_number(as.numeric(death-today)),
+#                 #               ' days of life left. ',
+#                 '       la citatio del dia es ')
+  
+  intro_parameters <- paste0('key=', api_key, 
+                             '&src=', say,
+                             '&hl=ca-es',
+                             '&f=44khz_16bit_mono')
+  
+} else {
+  say <- paste0('good ', 
+                time, 
+                ' mister brew. this is day number ',
+                replace_number(lived + 1),
+                #               '. you have used up ',
+                #               replace_number(percent),
+                #               ' percent of your life and you have about',
+                #               replace_number(as.numeric(death-today)),
+                #               ' days of life left. ',
+                '       the quote of the day is ')
+  
+  intro_parameters <- paste0('key=', api_key, 
+                             '&src=', say,
+                             '&hl=en-gb',
+                             '&f=44khz_16bit_mono')
+}
 
-intro_parameters <- paste0('key=', api_key, 
-                     '&src=', say,
-                     '&hl=en-gb',
-                     '&f=44khz_16bit_mono')
+
+
 voice_intro <- paste0(link, intro_parameters)
 
 con <-file("intro.txt")
