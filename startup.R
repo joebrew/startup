@@ -1,8 +1,9 @@
-library(qdap)
-library(weatherData)
-setwd('/home/joebrew/Documents/startup')
 
-catalan <- TRUE
+setwd('/home/joebrew/Documents/startup')
+source('replace_number.R')
+# library(qdap)
+library(weatherData)
+catalan <- FALSE
 
 # Define birthday and life expectancy
 birth <- as.Date('1985-11-07')
@@ -55,7 +56,7 @@ con <- file('/home/joebrew/Documents/private/voicerss/api_key.txt')
 api_key <- readLines(con)
 close(con)
 
-link <- 'http://api.voicerss.org/?'
+alink <- 'http://api.voicerss.org/?'
 
 
 #####
@@ -100,7 +101,7 @@ if(catalan){
 
 
 
-voice_intro <- paste0(link, intro_parameters)
+voice_intro <- paste0(alink, intro_parameters)
 
 con <-file("intro.txt")
 writeLines(voice_intro, con)
@@ -119,7 +120,7 @@ quote_parameters <- paste0('key=', api_key,
                            '&src=', gsub("'", "", quote),
                            '&hl=en-us',
                            '&f=44khz_16bit_mono')
-voice_quote <- paste0(link, quote_parameters)
+voice_quote <- paste0(alink, quote_parameters)
 
 con <-file("quote.txt")
 writeLines(voice_quote, con)
@@ -136,7 +137,7 @@ weather <- weather[nrow(weather),]
 weather_hour <- replace_number(substr(weather$Time, 12, 13))
 weather_minute <- replace_number(substr(weather$Time, 15, 16))
 weather_say <- paste0('at ',
-                      replace_number(weather$TimeEDT),
+                      replace_number(weather$TimeEST),
                       '   it was ',
                       replace_number(weather$TemperatureF),
                       '  degrees ')
@@ -155,7 +156,7 @@ weather_parameters <- paste0('key=', api_key,
                            '&src=', weather_say,
                            '&hl=en-gb',
                            '&f=44khz_16bit_mono')
-voice_weather <- paste0(link, weather_parameters)
+voice_weather <- paste0(alink, weather_parameters)
 
 con <-file("weather.txt")
 writeLines(voice_weather, con)
@@ -184,7 +185,7 @@ close(con)
 #                            '&src=', bye,
 #                            '&hl=en-gb',
 #                            '&f=44khz_16bit_mono')
-# bye_quote <- paste0(link, bye_parameters)
+# bye_quote <- paste0(alink, bye_parameters)
 # 
 # con <-file("bye.txt")
 # writeLines(bye_quote, con)

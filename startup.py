@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import urllib
 import os
 import numpy
@@ -12,7 +14,7 @@ os.system('Rscript startup.R')
 #robjects.r['source']("startup.R")
 
 # Language
-catalan = True
+catalan = False
 
 #####
 # INTRO
@@ -47,10 +49,10 @@ urllib.urlretrieve (lines, "weather.mp3")
 
 # Play
 if catalan:
-	os.system('play intro.mp3')
+    os.system('play intro.mp3')
 else:
-	os.system('play intro.mp3')
-	os.system('play quote.mp3')
-	os.system('play weather.mp3')
+    os.system('play intro.mp3')
+    # os.system('play quote.mp3')
+    os.system('play weather.mp3')
 
 #os.system('play bye.mp3')
