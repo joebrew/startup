@@ -1,13 +1,15 @@
-#!/usr/bin/env python
-
 import urllib
 import os
 import numpy
 import pandas as pd
 import rpy2.robjects as robjects
+import time
 
 # Set working directory
 os.chdir('/home/joebrew/Documents/startup')
+
+# Sleep
+#time.sleep(3)
 
 # Run R code to get link for the day
 os.system('Rscript startup.R')
@@ -52,7 +54,7 @@ if catalan:
     os.system('play intro.mp3')
 else:
     os.system('play intro.mp3')
-    # os.system('play quote.mp3')
+    os.system('play quote.mp3')
     os.system('play weather.mp3')
 
 #os.system('play bye.mp3')
